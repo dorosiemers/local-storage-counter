@@ -1,6 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 
+import { saveToLocal, loadFromLocal } from "./localStorage.js";
+
 function App() {
   const [count, setCount] = useState(0);
 
