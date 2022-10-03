@@ -1,10 +1,19 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { saveToLocal, loadFromLocal } from "./localStorage.js";
+const LOCAL_STORAGE_KEY = "counter-storage";
 
 function App() {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const storedCounter = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedCounter) setCount(storedCounter);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(count));
+  }, [count]);
 
   function decrementCount() {
     if (count < 0) {
